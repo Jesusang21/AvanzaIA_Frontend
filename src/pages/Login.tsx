@@ -1,7 +1,7 @@
 import { Container, Form, Button, Card, Spinner, Alert } from 'react-bootstrap';
 import logoAvanzaIA from '../assets/logoAvanzaIA.png';
 import '../css/auth.css';
-import { useState, type SubmitEvent } from 'react';
+import { useState, type SubmitEvent, useEffect } from 'react';
 import { loginUser } from '../api/authApi';
 import { useNavigate } from "react-router";
 
@@ -19,7 +19,7 @@ export function Login() {
 
         try {
             const data = await loginUser({ email, password });
-
+            console.log(data)
             if (data.token) {
                 localStorage.setItem('token', data.token);
             }
@@ -35,6 +35,12 @@ export function Login() {
             setLoading(false);
         }
     }
+    useEffect(() => {
+        const token = localStorage.getItem('token');
+        if (token) {
+            navigate('/homePage', { replace: true });
+        }
+    }, [navigate]);
     return (
         <div className="login-bg vh-100 overflow-hidden d-flex align-items-center justify-content-center px-3">
             <Container className="d-flex justify-content-center">
@@ -123,7 +129,7 @@ export function Login() {
                     <Card.Footer className="bg-transparent border-0 text-center pt-2">
                         <span className="text-muted small">
                             ¿Aún no tienes cuenta?{' '}
-                            <a href="/register" className="fw-semibold text-decoration-none">
+                            <a href="/registerUser" className="fw-semibold text-decoration-none">
                                 Regístrate
                             </a>
                         </span>

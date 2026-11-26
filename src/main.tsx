@@ -9,15 +9,29 @@ import { NoEncontrado } from './pages/NoEncontrado.tsx';
 import { RegisterUser } from './pages/RegisterUser.tsx';
 import { Login } from './pages/Login.tsx';
 import { HomePage } from './pages/Home.tsx';
+import { ProtectedRoute } from './components/ProtegerRuta.tsx';
 
 const router = createBrowserRouter([
   {
     path: "/",
     Component: App,
     children: [
-      { index: true, Component: Login },     // index: true → se muestra en "/"
+      // Rutas públicas
+      { index: true, Component: Login },
       { path: "registerUser", Component: RegisterUser },
-      { path: "homePage", Component: HomePage },
+
+      // Rutas protegidas (todas las que pongas en children estarán protegidas)
+      {
+        Component: ProtectedRoute,
+        children: [
+          { path: "homePage", Component: HomePage },
+          // Ejemplo de futuras páginas protegidas:
+          // { path: "perfil", Component: PerfilPage },
+          // { path: "configuracion", Component: ConfigPage },
+        ],
+      },
+
+      // Ruta 404
       { path: "*", Component: NoEncontrado },
     ],
   },

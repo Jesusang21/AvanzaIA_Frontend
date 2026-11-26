@@ -39,7 +39,6 @@ async function requestAuth<T>(endpoint: string, body: unknown): Promise<T> {
     if (!response.ok) {
         throw new Error(data.message || 'Correo electronico o contraseña incorrecta.');
     }
-    console.log(data)
     return data as T;
 }
 
