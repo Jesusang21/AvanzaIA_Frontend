@@ -42,7 +42,7 @@ export function Login() {
         }
     }, [navigate]);
     return (
-        <div className="login-bg vh-100 overflow-hidden d-flex align-items-center justify-content-center px-3">
+        <div className="login-bg d-flex align-items-start align-items-md-center justify-content-center px-3 py-4">
             <Container className="d-flex justify-content-center">
                 <Card className="login-card border-0 shadow-lg p-3 p-md-4 w-100" style={{ maxWidth: '420px' }}>
                     <Card.Body>
